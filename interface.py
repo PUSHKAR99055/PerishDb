@@ -1,3 +1,4 @@
+from .storage import Storage
 class DBDB:
 	def __init__(self, f):
 		self._storage = Storage(f)
