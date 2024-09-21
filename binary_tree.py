@@ -1,4 +1,6 @@
-class BinaryTree(LogicalBase):
+import pickle
+import logical
+class BinaryTree(logical.LogicalBase):
 	def _get(self, node, key):
 		while node is not None:
 			if key < node.key:
@@ -23,7 +25,7 @@ class BinaryTree(LogicalBase):
 		def prepare_to_store(self, storage):
 			if self._referent:
 				self._referent.store_refs(storage)
-		@static_method
+		@staticmethod
 		def referent_to_string(referent):
 			return pickle.dumps({
 				'left': referent.left_ref.address,
@@ -31,6 +33,7 @@ class BinaryTree(LogicalBase):
 				'value': referent.value_ref.address,
 				'right': referent.right_ref.address,
 				'length': referent.length
+			})
 	class ValueRef(object):
 		def store_refs(self, storage):
 			self.value_ref.store(storage)

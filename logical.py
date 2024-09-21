@@ -24,7 +24,7 @@ class ValueRef(object):
 	def store(self, storage):
 		if self._referent is not None and not self._address:
 			self.prepare_to_store(storage)
-			self._address = storage.write(self.referent_to_string(self._referent)
+			self._address = storage.write(self.referent_to_string(self._referent))
 	def store(self, storage):
 		if self._referent is not None and not self._address:
 			self.prepare_to_store(storage)
