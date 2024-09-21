@@ -1,8 +1,9 @@
 from .storage import Storage
+import binary_tree
 class DBDB:
 	def __init__(self, f):
 		self._storage = Storage(f)
-		self._tree = BinaryTree(self._storage)
+		self._tree = binary_tree.BinaryTree(self._storage)
 	def __getitem__(self, key):
 		self._assert_not_closed()
 		return self._tree.get(key)
