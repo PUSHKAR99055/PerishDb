@@ -1,3 +1,4 @@
+import portalocker
 class LogicalBase(object):
 	def get(self, key):
 		if not self._storage.locked:

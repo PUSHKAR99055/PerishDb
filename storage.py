@@ -1,3 +1,4 @@
+import portalocker
 class Storage(object):
 	def lock(self):
 		if not self.locked:
