@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Database UI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Database UI</h1>
+
+        <!-- Display flash messages for feedback -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for category, message in messages %}
+                        <div class="alert {{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <!-- Insert Form -->
+        <form action="{{ url_for('insert') }}" method="POST">
+            <input type="text" name="data" placeholder="Enter data" required>
+            <button type="submit">Insert</button>
+        </form>
+
+        <!-- Display Data -->
+        <h2>Current Data</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Data</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in data %}
+                    <tr>
+                        <td>{{ item.id }}</td>
+                        <td>{{ item.data }}</td>
+                        <td>
+                            <form action="{{ url_for('update', id=item.id) }}" method="POST">
+                                <input type="text" name="data" value="{{ item.data }}" required>
+                                <button type="submit">Update</button>
+                            </form>
+                            <a href="{{ url_for('delete', id=item.id) }}">Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

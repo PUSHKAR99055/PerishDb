@@ -1,5 +1,6 @@
 import sys
-import PerishDb
+import getopt
+
 def main(argv):
 	print(argv[1])
 	if not (4 <= len(argv) <= 5):
