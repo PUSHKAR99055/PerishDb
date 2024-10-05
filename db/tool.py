@@ -1,5 +1,26 @@
 import sys
 import getopt
+from . import connect
+#from PERISHDB import DBDB as PerishDb
+from . import perish_db
+
+def usage():
+    print("Usage: python tool.py <dbname> <verb> <key> [value]")
+    print("  <dbname>: The database file to use")
+    print("  <verb>: 'get', 'set', or 'delete'")
+    print("    'get' requires a <key>")
+    print("    'set' requires a <key> and <value>")
+    print("    'delete' requires a <key>")
+    print("\nExample:")
+    print("  python tool.py mydb.db set mykey myvalue")
+    print("  python tool.py mydb.db get mykey")
+    print("  python tool.py mydb.db delete mykey")
+
+OK = 0         # Success
+BAD_ARGS = 1   # Incorrect number of arguments
+BAD_VERB = 2   # Invalid verb (not 'get', 'set', 'delete')
+BAD_KEY = 3    # Key not found
+
 
 def main(argv):
 	print(argv[1])
@@ -11,7 +32,7 @@ def main(argv):
 	if verb not in {'get', 'set', 'delete'}:
 		usage()
 		return BAD_VERB
-	db = PerishDb.connect(dbname)
+	db = connect(dbname)
 	try:
 		if verb == 'get':
 			sys.stdout.write(db[key])
