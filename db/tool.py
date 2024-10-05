@@ -25,16 +25,16 @@ def main(argv):
     if verb not in {'get', 'set', 'delete'}:
         usage()
         return BAD_VERB
-    db = db.connect(dbname)
+    pdb = db.connect(dbname)
     try:
         if verb == 'get':
-            sys.stdout.write(db[key])
+            sys.stdout.write(pdb[key])
         elif verb == 'set':
-            db[key] = value
-            db.commit()
+            pdb[key] = value
+            pdb.commit()
         else:
-            del db[key]
-            db.commit()
+            del pdb[key]
+            pdb.commit()
     except KeyError:
         print("Key not found", file=sys.stderr)
         return BAD_KEY
