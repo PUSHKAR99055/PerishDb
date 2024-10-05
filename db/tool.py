@@ -4,7 +4,7 @@ import getopt
 def main(argv):
 	print(argv[1])
 	if not (4 <= len(argv) <= 5):
-		usage()
+		usage() #define usage
 		return BAD_ARGS
 	dbname, verb, key, value = (argv[1:] + [None])[:4]
 	print(dbname, verb, key)
