@@ -23,8 +23,9 @@
 
         <!-- Insert Form -->
         <form action="{{ url_for('insert') }}" method="POST">
-            <input type="text" name="data" placeholder="Enter data" required>
-            <button type="submit">Insert</button>
+            <input type="text" name="key" placeholder="Enter key" required>
+            <input type="text" name="value" placeholder="Enter value" required>
+            <button type="submit">Insert/Update</button>
         </form>
 
         <!-- Display Data -->
@@ -32,22 +33,24 @@
         <table>
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Data</th>
+                    <th>Key</th>
+                    <th>Value</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-                {% for item in data %}
+                {% for key, value in data.items() %}
                     <tr>
-                        <td>{{ item.id }}</td>
-                        <td>{{ item.data }}</td>
+                        <td>{{ key }}</td>
+                        <td>{{ value }}</td>
                         <td>
-                            <form action="{{ url_for('update', id=item.id) }}" method="POST">
-                                <input type="text" name="data" value="{{ item.data }}" required>
+                            <!-- Update Form -->
+                            <form action="{{ url_for('update', key=key) }}" method="POST">
+                                <input type="text" name="value" value="{{ value }}" required>
                                 <button type="submit">Update</button>
                             </form>
-                            <a href="{{ url_for('delete', id=item.id) }}">Delete</a>
+                            <!-- Delete Link -->
+                            <a href="{{ url_for('delete', key=key) }}">Delete</a>
                         </td>
                     </tr>
                 {% endfor %}

@@ -3,7 +3,6 @@ import sys
 
 import db
 
-
 OK = 0
 BAD_ARGS = 1
 BAD_VERB = 2
