@@ -21,14 +21,22 @@
             {% endif %}
         {% endwith %}
 
-        <!-- Insert Form -->
+        <!-- Insert/Update Form -->
+        <h2>Insert or Update Data</h2>
         <form action="{{ url_for('insert') }}" method="POST">
             <input type="text" name="key" placeholder="Enter key" required>
             <input type="text" name="value" placeholder="Enter value" required>
             <button type="submit">Insert/Update</button>
         </form>
 
-        <!-- Display Data -->
+        <!-- Delete Form -->
+        <h2>Delete Data</h2>
+        <form action="{{ url_for('delete_manual') }}" method="POST">
+            <input type="text" name="key" placeholder="Enter key to delete" required>
+            <button type="submit">Delete</button>
+        </form>
+
+        <!-- Display Current Data -->
         <h2>Current Data</h2>
         <table>
             <thead>
@@ -49,8 +57,6 @@
                                 <input type="text" name="value" value="{{ value }}" required>
                                 <button type="submit">Update</button>
                             </form>
-                            <!-- Delete Link -->
-                            <a href="{{ url_for('delete', key=key) }}">Delete</a>
                         </td>
                     </tr>
                 {% endfor %}

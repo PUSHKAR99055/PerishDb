@@ -29,18 +29,20 @@ def insert():
         flash("Please enter both key and value.", "warning")
     return redirect(url_for('index'))
 
-@app.route('/delete/<key>')
-def delete(key):
+@app.route('/delete_manual', methods=['POST'])
+def delete_manual():
+    key = request.form['key']
     try:
         pdb = db.connect('example.db')
-        del pdb[key]  
+        del pdb[key]  # Delete by key
         pdb.commit()
-        flash("Data deleted successfully!", "success")
+        flash(f"Key '{key}' deleted successfully!", "success")
     except KeyError:
-        flash("Key not found.", "danger")
+        flash(f"Key '{key}' not found.", "danger")
     except Exception as e:
-        flash(f"Error deleting data: {str(e)}", "danger")
+        flash(f"Error deleting key: {str(e)}", "danger")
     return redirect(url_for('index'))
+
 
 @app.route('/update/<key>', methods=['POST'])
 def update(key):
