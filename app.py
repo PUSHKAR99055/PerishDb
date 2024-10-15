@@ -2,16 +2,19 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 import db  
 
 app = Flask(__name__)
-app.secret_key = "supersecretkey"  
+app.secret_key = "supersecretkey" 
+
 @app.route('/')
 def index():
     try:
-        pdb = db.connect('example.db')  
-        data = {key: pdb[key] for key in pdb}  
-        return render_template('index.html', data=data)
+        pdb = db.connect('example.db')  # Connect to your DB
+        keys = pdb.keys()  # Fetch all keys (assuming your DB has a 'keys()' method)
+        data = {key: pdb.get(key) for key in keys}  # Retrieve key-value pairs
     except Exception as e:
         flash(f"Error fetching data: {str(e)}", "danger")
-        return render_template('index.html', data={})
+        data = {}  # Empty data if there's an issue
+    return render_template('index.html', data=data)
+
 
 @app.route('/insert', methods=['POST'])
 def insert():

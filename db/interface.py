@@ -41,3 +41,6 @@ class DBDB(object):
 
     def __len__(self):
         return len(self._tree)
+    
+    def keys(self):
+        return list(self.data.keys())
