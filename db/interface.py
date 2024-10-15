@@ -43,4 +43,4 @@ class DBDB(object):
         return len(self._tree)
     
     def keys(self):
-        return list(self.data.keys())
+        return list(self._tree.keys())

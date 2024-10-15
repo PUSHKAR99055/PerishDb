@@ -9,7 +9,7 @@ def index():
     try:
         pdb = db.connect('example.db')  # Connect to your DB
         keys = pdb.keys()  # Fetch all keys (assuming your DB has a 'keys()' method)
-        data = {key: pdb.get(key) for key in keys}  # Retrieve key-value pairs
+        data = {key: pdb[key] for key in keys}  # Retrieve key-value pairs
     except Exception as e:
         flash(f"Error fetching data: {str(e)}", "danger")
         data = {}  # Empty data if there's an issue

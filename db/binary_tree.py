@@ -140,3 +140,16 @@ class BinaryTree(LogicalBase):
             if next_node is None:
                 return node
             node = next_node
+    node_ref_class = BinaryNodeRef  # Already present
+
+    def _in_order_traversal(self, node, result):
+        if node is not None:
+            self._in_order_traversal(self._follow(node.left_ref), result)
+            result.append(node.key)
+            self._in_order_traversal(self._follow(node.right_ref), result)
+
+    def keys(self):
+        result = []
+        root = self._follow(self._tree_ref)  # Use self._tree_ref instead of root_ref
+        self._in_order_traversal(root, result)
+        return result
