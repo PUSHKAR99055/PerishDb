@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Database UI</title>
+    <title>Enhanced Database UI</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
@@ -21,9 +21,9 @@
             {% endif %}
         {% endwith %}
 
-        <!-- Insert/Update and Delete Forms -->
-        <div class="form-container">
-            <div class="form-section">
+        <!-- Main Sections -->
+        <div class="main-sections">
+            <div class="form-container insert-update">
                 <h2>Insert or Update Data</h2>
                 <form action="{{ url_for('insert') }}" method="POST">
                     <input type="text" name="key" placeholder="Enter key" required>
@@ -32,40 +32,41 @@
                 </form>
             </div>
 
-            <div class="form-section">
+            <div class="form-container delete">
                 <h2>Delete Data</h2>
                 <form action="{{ url_for('delete_manual') }}" method="POST">
                     <input type="text" name="key" placeholder="Enter key to delete" required>
                     <button type="submit">Delete</button>
                 </form>
             </div>
-        </div>
 
-        <!-- Current Data Table -->
-        <h2>Current Data</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Key</th>
-                    <th>Value</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for key, value in data.items() %}
-                    <tr>
-                        <td>{{ key }}</td>
-                        <td>{{ value }}</td>
-                        <td>
-                            <form action="{{ url_for('update', key=key) }}" method="POST">
-                                <input type="text" name="value" value="{{ value }}" required>
-                                <button type="submit">Update</button>
-                            </form>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+            <div class="current-data">
+                <h2>Current Data</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Key</th>
+                            <th>Value</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for key, value in data.items() %}
+                            <tr>
+                                <td>{{ key }}</td>
+                                <td>{{ value }}</td>
+                                <td>
+                                    <form action="{{ url_for('update', key=key) }}" method="POST">
+                                        <input type="text" name="value" value="{{ value }}" required>
+                                        <button type="submit">Update</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </body>
 </html>
